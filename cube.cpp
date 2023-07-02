@@ -7,9 +7,9 @@ int Cube::getFaceIndex(FACE face){
         case UP: return 0;
         case LEFT: return 1;
         case FRONT: return 2;
-        case DOWN: return 3;
-        case RIGHT: return 4;
-        case BACK: return 5;
+        case RIGHT: return 3;
+        case BACK: return 4;
+        case DOWN: return 5;
     }
 }
 
@@ -18,9 +18,9 @@ Cube::FACE Cube::getIndexFace(int index){
         case 0: return UP;
         case 1: return LEFT;
         case 2: return FRONT;
-        case 3: return DOWN;
-        case 4: return RIGHT;
-        case 5: return BACK;
+        case 3: return RIGHT;
+        case 4: return BACK;
+        case 5: return DOWN;
     }
 }
 
