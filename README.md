@@ -1,2 +1,2 @@
 # rubiks-cube-solver
-Rubik's Cube Solver Project for OOPS and DSA implementation
+Rubik's Cube Solver Project for C++ OOPS and DSA implementation
