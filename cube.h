@@ -13,8 +13,10 @@ class Cube{
 
     virtual int getColorIndex(COLOR color);
     virtual char getColorLetter(COLOR color);
+    virtual COLOR getIndexColor(int index);
 
     virtual int getFaceIndex(FACE face);
+    virtual FACE getIndexFace(int index);
 
     //rotations
     virtual void l() = 0;
@@ -44,6 +46,8 @@ class Cube{
     //basics
     virtual COLOR getColor(FACE face, int row, int col) = 0;
     virtual void printCube();
+    virtual void shuffle(int moves);
+    virtual bool isSolved();
 };
 
 #endif

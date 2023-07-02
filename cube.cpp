@@ -2,10 +2,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void Cube::printCube(){
-
-}
-
 int Cube::getFaceIndex(FACE face){
     switch(face){
         case UP: return 0;
@@ -17,6 +13,17 @@ int Cube::getFaceIndex(FACE face){
     }
 }
 
+Cube::FACE Cube::getIndexFace(int index){
+    switch(index){
+        case 0: return UP;
+        case 1: return LEFT;
+        case 2: return FRONT;
+        case 3: return DOWN;
+        case 4: return RIGHT;
+        case 5: return BACK;
+    }
+}
+
 int Cube::getColorIndex(COLOR color){
     switch(color){
         case WHITE: return 0;
@@ -25,6 +32,17 @@ int Cube::getColorIndex(COLOR color){
         case YELLOW: return 3;
         case GREEN: return 4;
         case ORANGE: return 5;
+    }
+}
+
+Cube::COLOR Cube::getIndexColor(int index){
+    switch(index){
+        case 0: return WHITE;
+        case 1: return BLUE;
+        case 2: return RED;
+        case 3: return YELLOW;
+        case 4: return GREEN;
+        case 5: return ORANGE;
     }
 }
 
@@ -46,10 +64,14 @@ void Cube::printCube(){
         for(int j = 0; j < 3; j++){
             cout << getColorLetter(getColor(FACE::UP, i, j)) << ' ';
         }
+        cout << '\n';
     }
 
     for(int i = 0; i < 3; i++) {
-        for(int j = 0; j < 3; j++) cout << getColorLetter(getColor(FACE::LEFT, i, j)) << ' ' << getColorLetter(getColor(FACE::FRONT, i, j)) << ' ' << getColorLetter(getColor(FACE::RIGHT, i, j)) << ' ' << getColorLetter(getColor(FACE::BACK, i, j));
+        for(int j = 0; j < 3; j++) cout << getColorLetter(getColor(FACE::LEFT, i, j)) << ' ';
+        for(int j = 0; j < 3; j++) cout << getColorLetter(getColor(FACE::FRONT, i, j)) << ' ';
+        for(int j = 0; j < 3; j++) cout << getColorLetter(getColor(FACE::RIGHT, i, j)) << ' ';
+        for(int j = 0; j < 3; j++) cout << getColorLetter(getColor(FACE::BACK, i, j)) << ' ';
         cout << '\n';
     }
 
@@ -58,5 +80,48 @@ void Cube::printCube(){
         for(int j = 0; j < 3; j++){
             cout << getColorLetter(getColor(FACE::DOWN, i, j)) << ' ';
         }
+        cout << '\n';
     }
+}
+
+void Cube::shuffle(int moves){
+    while(moves--){
+        int idx = floor(((double) rand()/ (RAND_MAX))*18);
+        idx = max(0, idx); idx = (17, idx);
+        switch(idx){
+            case 0:{l(); break;}
+            case 1:{l2(); break;}
+            case 2:{lp(); break;}
+
+            case 3:{r(); break;}
+            case 4:{r2(); break;}
+            case 5:{rp(); break;}
+
+            case 6:{u(); break;}
+            case 7:{u2(); break;}
+            case 8:{up(); break;}
+
+            case 9:{b(); break;}
+            case 10:{b2(); break;}
+            case 11:{bp(); break;}
+
+            case 12:{d(); break;}
+            case 13:{d2(); break;}
+            case 14:{dp(); break;}
+
+            case 15:{f(); break;}
+            case 16:{f2(); break;}
+            case 17:{fp(); break;}
+        }
+    }
+}
+
+bool Cube::isSolved(){
+    for(int i = 0; i < 6; i++){
+        for(int j = 0; j < 3; j++) for(int k = 0; k < 3; k++){
+            if(getColorIndex(getColor(getIndexFace(i), j, k)) == i) continue;
+            return false;
+        }
+    }
+    return true;
 }
