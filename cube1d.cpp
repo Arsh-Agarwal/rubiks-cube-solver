@@ -91,6 +91,25 @@ class Cube1d: public Cube{
     }
     void b2() override{b(); b();}
     void bp() override{b(); b(); b();}
+
+    ////////////////////////////////////
+    ////////// Overrides and Hash
+    ///////////////////////////////////
+    bool operator == (const Cube1d& a){
+        for(int i = 0; i < 54; i++) if(a.cube[i]!=cube[i]) return false;
+        return true;
+    }
+
+    void operator = (const Cube1d& a){
+        for(int i = 0; i < 54; i++) cube[i]=a.cube[i];
+    }
+
+    struct Hash1d{
+        size_t operator() (const Cube1d& a) {
+            string s; for(int i = 0; i < 54; i++) s += char(a.cube[i]);
+            return hash<string>()(s);
+        }
+    };
 };
 
 signed main(){

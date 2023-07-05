@@ -1,6 +1,9 @@
 #ifndef CUBE_H
 #define CUBE_H
 
+using namespace std;
+#include<bits/stdc++.h>
+
 class Cube{
     public:
     enum COLOR{
@@ -17,6 +20,10 @@ class Cube{
 
     virtual int getFaceIndex(FACE face);
     virtual FACE getIndexFace(int index);
+
+    virtual void performMove(int index);
+    virtual void reverseMove(int index);
+    virtual string getMoveStr(int index);
 
     //rotations
     virtual void l() = 0;
@@ -46,7 +53,7 @@ class Cube{
     //basics
     virtual COLOR getColor(FACE face, int row, int col) = 0;
     virtual void printCube();
-    virtual void shuffle(int moves);
+    virtual vector<int> shuffle(int moves);
     virtual bool isSolved();
 };
 

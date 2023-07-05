@@ -1,11 +1,14 @@
 #include "cube.h"
+#include "dfs.h"
+#include "bfs.h"
+#include "iddfs.h"
 using namespace std;
 #include <bits/stdc++.h>
 
 class Cube3d: public Cube{
 
-    int cube[6][3][3];
     public:
+    int cube[6][3][3];
     Cube3d(){
         for(int i = 0; i < 6; i++) {for(int j = 0; j < 3; j++) for(int k = 0; k < 3; k++) cube[i][j][k] = i;}
     }
@@ -88,11 +91,63 @@ class Cube3d: public Cube{
     }
     void b2() override{b(); b();}
     void bp() override{b(); b(); b();}
+
+    ////////////////////////////////////
+    ////////// Overrides and Hash
+    ///////////////////////////////////
+    bool operator == (const Cube3d& a) const {
+        for(int i = 0; i < 6; i++){
+            for(int j = 0; j < 3; j++){
+                for(int k = 0; k < 3; k++) if(a.cube[i][j][k]!=cube[i][j][k]) return false;
+            }
+        }
+        return true;
+    }
+
+    void operator = (const Cube3d& a) {
+        for(int i = 0; i < 6; i++){
+            for(int j = 0; j < 3; j++){
+                for(int k = 0; k < 3; k++) cube[i][j][k]=a.cube[i][j][k];
+            }
+        }
+    }
+};
+
+struct Hasher3d{
+    size_t operator()(const Cube3d& a) const {
+        string s; for(int i = 0; i < 6; i++){
+            for(int j = 0; j < 3; j++) for(int k = 0; k < 3; k++) s+=char(a.cube[i][j][k]);
+        }
+        return hash<string>()(s);
+    }
 };
 
 signed main(){
     Cube3d cube = Cube3d();
-    //cube.shuffle(100);
-    cube.printCube();
+    //for(int i = 0; i < 6; i++) {cube.rp(); cube.dp(); cube.r(); cube.d();}
+    vector<int> shuffle = cube.shuffle(6);
+    for(auto it: shuffle) cout << cube.getMoveStr(it) << ' '; cout << '\n';
+
+    //////////////////////////////////////
+    ////// DFS testing
+    /////////////////////////////////////
+    // DFS<Cube3d> dfs = DFS<Cube3d>(cube);
+    // vector<int> moves = dfs.solve(6);
+
+
+    /////////////////////////////////////////
+    ////// BFS testing
+    ////////////////////////////////////////
+    // BFS<Cube3d, Hasher3d> bfs = BFS<Cube3d, Hasher3d>(cube);
+    // vector<int> moves = bfs.solve(5);
+
+    ////////////////////////////////////////
+    ///// IDDFS testing
+    ////////////////////////////////////////
+    IDDFS<Cube3d> iddfs = IDDFS<Cube3d>(cube);
+    vector<int> moves = iddfs.solve(6);
+
+    for(auto it: moves) cout << cube.getMoveStr(it) << ' '; cout << '\n';
+
     return 0;
 }
