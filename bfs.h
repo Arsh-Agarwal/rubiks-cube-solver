@@ -1,5 +1,5 @@
-#ifndef IDDFS_H
-#define IDDFS_H
+#ifndef BFS_H
+#define BFS_H
 
 #include <bits/stdc++.h>
 using namespace std;

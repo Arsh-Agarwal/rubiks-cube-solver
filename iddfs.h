@@ -9,7 +9,7 @@ class IDDFS{
 
     private:
     vector<int> moves;
-    bool solved;
+    bool solved;    
     void dfs(T state, int rem){
         solved |= state.isSolved();
         if(solved or rem<=0) return;
