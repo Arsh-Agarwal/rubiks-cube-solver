@@ -1,22 +1,22 @@
 # rubiks-cube-solver
 Rubik's Cube Solver Project for OOPS and DSA implementation
 
-Use, below code to compile and generate a.exe
+Use, below code to **compile** and generate a.exe
 ```
 g++ main.cpp models/cube.cpp
 ```
 
-Run using
+**Run** using
 ```
 a.exe
 ```
 on the command prompt.
 
-Alternatively you can use
+Alternatively you can use for **quick run**
 ```
 run.bat
 ```
-to avoid providing inputs manually and directly running with arguments. <br />
+This can avoid providing inputs manually and directly run with arguments. <br />
 
 The file "run.bat" can be editted for custom inputs. <br />
 
